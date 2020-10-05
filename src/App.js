@@ -8,16 +8,23 @@ class App extends Component {
   state = {
     comments: [],
   };
-
-  addComment = () => {
-    /* change me */
+static contextType = CommentsContext
+  
+  addComment = (comment) => {
+    
+    this.setState((prevState) => {
+      prevState.comments.push(comment)
+      return {comments: prevState.comments}
+    })
   }
+  
 
   render() {
     return (
       <CommentsContext.Provider
         value={{
           comments: this.state.comments,
+          addComment: this.addComment
         }}
       >
         <div className="App">
